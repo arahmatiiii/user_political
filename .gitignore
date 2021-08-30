@@ -127,3 +127,11 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+##### folder name
+data
+assets
+src/lightning_logs
+models
+summary
