@@ -130,6 +130,7 @@ dmypy.json
 
 
 ##### folder name
+.idea
 data
 assets
 src/lightning_logs
