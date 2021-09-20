@@ -50,7 +50,7 @@ class BaseConfig:
                                  help="...")
 
         self.parser.add_argument("--max_sentence_len", type=int,
-                                 default=120)
+                                 default=100)
 
     def get_config(self):
         return self.parser.parse_args()
