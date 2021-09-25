@@ -1,6 +1,4 @@
-import os
 import logging
-import time
 import pytorch_lightning as pl
 from pytorch_lightning.loggers import CSVLogger
 
@@ -48,8 +46,9 @@ if __name__ == "__main__":
                              test_first_cul=list(TEST_DATA.first_text),
                              test_target=TEST_INDEXED_TARGET,
 
-                             batch_size=ARGS.batch_size, num_workers=ARGS.num_workers, max_len=ARGS.max_sentence_len,
-                             tokenizer_path=ARGS.t5_path)
+                             batch_size=ARGS.batch_size, num_workers=ARGS.num_workers,
+                             max_len=ARGS.max_sentence_len,
+                             tokenizer_path=ARGS.bert_path)
 
     DATA_MODULE.setup()
     CHECKPOINT_CALLBACK = build_checkpoint_callback(save_top_k=ARGS.save_top_k)
@@ -63,7 +62,8 @@ if __name__ == "__main__":
                          progress_bar_refresh_rate=60, logger=LOGGER)
 
     # Create Model
-    MODEL = Classifier(num_classes=len(set(list(TRAIN_DATA.targets))), t5_model_path=ARGS.t5_path,
+    MODEL = Classifier(num_classes=len(set(list(TRAIN_DATA.targets))),
+                       bert_model_path=ARGS.bert_path,
                        lr=ARGS.lr, max_len=ARGS.max_sentence_len)
 
     # Train and Test Model

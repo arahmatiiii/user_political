@@ -8,7 +8,10 @@ class BaseConfig:
         self.parser = argparse.ArgumentParser()
 
         self.parser.add_argument("--t5_path", type=str,
-                                 default=Path(__file__).parents[2].__str__() + "/assets/mt5_en_large")
+                                 default=Path(__file__).parents[2].__str__() + "/assets/pretrained_models/mt5_en_large")
+
+        self.parser.add_argument("--bert_path", type=str,
+                                 default=Path(__file__).parents[2].__str__() + "/assets/pretrained_models/MBert")
 
         self.parser.add_argument("--csv_logger_path", type=str,
                                  default=Path(__file__).parents[2].__str__() + "/assets")
@@ -39,7 +42,7 @@ class BaseConfig:
                                  help="...")
 
         self.parser.add_argument("--n_epochs", type=int,
-                                 default=100,
+                                 default=1,
                                  help="...")
 
         self.parser.add_argument("--batch_size", type=int,
@@ -50,7 +53,7 @@ class BaseConfig:
                                  help="...")
 
         self.parser.add_argument("--max_sentence_len", type=int,
-                                 default=100)
+                                 default=150)
 
     def get_config(self):
         return self.parser.parse_args()
