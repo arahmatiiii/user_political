@@ -5,7 +5,7 @@ from pytorch_lightning.callbacks import ModelCheckpoint
 from data_preparation import token_padding, characters_padding
 
 
-def build_checkpoint_callback(save_top_k, filename='QTag-{epoch:02d}-{val_loss:.2f}', monitor='val_loss'):
+def build_checkpoint_callback(save_top_k, monitor, filename='QTag-{epoch:02d}-{val_loss:.2f}'):
     # saves a file like: input/QTag-epoch=02-val_loss=0.32.ckpt
     checkpoint_callback = ModelCheckpoint(
         monitor=monitor,  # monitored quantity
