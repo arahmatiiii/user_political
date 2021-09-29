@@ -1,5 +1,4 @@
 import argparse
-import math
 from pathlib import Path
 
 
@@ -8,10 +7,10 @@ class BaseConfig:
         self.parser = argparse.ArgumentParser()
 
         self.parser.add_argument("--t5_path", type=str,
-                                 default=Path(__file__).parents[2].__str__() + "/assets/pretrained_models/mt5_en_large")
+                                 default=Path(__file__).parents[2].__str__() + "/assets/pretrained_models/..")
 
         self.parser.add_argument("--bert_path", type=str,
-                                 default=Path(__file__).parents[2].__str__() + "/assets/pretrained_models/MBert")
+                                 default=Path(__file__).parents[2].__str__() + "/assets/pretrained_models/parsbert_v3")
 
         self.parser.add_argument("--csv_logger_path", type=str,
                                  default=Path(__file__).parents[2].__str__() + "/assets")
@@ -42,7 +41,7 @@ class BaseConfig:
                                  help="...")
 
         self.parser.add_argument("--n_epochs", type=int,
-                                 default=100,
+                                 default=20,
                                  help="...")
 
         self.parser.add_argument("--batch_size", type=int,
@@ -53,7 +52,20 @@ class BaseConfig:
                                  help="...")
 
         self.parser.add_argument("--max_sentence_len", type=int,
-                                 default=150)
+                                 default=100)
+
+        self.parser.add_argument("--filter_sizes", type=list,
+                                 default=[3, 4, 5])
+        self.parser.add_argument("--n_filters", type=int,
+                                 default=120)
+        self.parser.add_argument("--hidden_dim", type=int,
+                                 default=128)
+        self.parser.add_argument("--n_layers", type=int,
+                                 default=1)
+        self.parser.add_argument("--bidirectional", type=bool,
+                                 default=True)
+        self.parser.add_argument("--dropout", type=float,
+                                 default=0.2)
 
     def get_config(self):
         return self.parser.parse_args()

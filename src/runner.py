@@ -57,14 +57,16 @@ if __name__ == "__main__":
 
     # Instantiate the Model Trainer
     EARLY_STOPPING_CALLBACK = EarlyStopping(monitor="val_total_F1", mode='max', patience=3)
-    TRAINER = pl.Trainer(max_epochs=ARGS.n_epochs, gpus=1,
+    TRAINER = pl.Trainer(max_epochs=ARGS.n_epochs, gpus=[0],
                          callbacks=[CHECKPOINT_CALLBACK, EARLY_STOPPING_CALLBACK],
                          progress_bar_refresh_rate=60, logger=LOGGER)
 
     # Create Model
     MODEL = Classifier(num_classes=len(set(list(TRAIN_DATA.targets))),
                        bert_model_path=ARGS.bert_path,
-                       lr=ARGS.lr, max_len=ARGS.max_sentence_len)
+                       lr=ARGS.lr, max_len=ARGS.max_sentence_len, n_filters=ARGS.n_filters,
+                       filter_sizes=ARGS.filter_sizes, hidden_dim=ARGS.hidden_dim, n_layers=ARGS.n_layers,
+                       bidirectional=ARGS.bidirectional, dropout=ARGS.dropout)
 
     # Train and Test Model
     TRAINER.fit(MODEL, datamodule=DATA_MODULE)
