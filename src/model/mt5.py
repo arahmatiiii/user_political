@@ -38,7 +38,8 @@ class CustomDataset(Dataset):
 
 class DataModule(pl.LightningDataModule):
 
-    def __init__(self, train_first_cul, train_target, val_first_cul, val_target, test_first_cul, test_target,
+    def __init__(self, train_first_cul, train_target, val_first_cul,
+                 val_target, test_first_cul, test_target,
                  batch_size, num_workers, tokenizer_path,
                  max_len):
         super().__init__()
